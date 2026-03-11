@@ -8,7 +8,7 @@ A python-based library for solving system of equation linear using matrix decomp
 
 This solver provides tools to decomposed matrix and find solutions for $x$ in the equation $Ax = b$. Instead of using generic inversion methods, it uses specific decomposition based on the properties matrix A.
 
-$\left\{\begin{array}{ccc}a_{11}x_{1} + a_{12}x_{2} + \cdots + a_{1n} & = & b_{1} \\ a_{21}x_{1} + a_{22}x_{2} + \cdots + a_{2n} & = & b_{2} \\ & \vdots & \\ {ccc}a_{n1}x_{1} + a_{n2}x_{2} + \cdots + a_{nn} & = & b_{n} \end{array}\right.$
+$$\left\{\begin{array}{ccc}a_{11}x_{1} + a_{12}x_{2} + \cdots + a_{1n} & = & b_{1} \\ a_{21}x_{1} + a_{22}x_{2} + \cdots + a_{2n} & = & b_{2} \\ & \vdots & \\ a_{n1}x_{1} + a_{n2}x_{2} + \cdots + a_{nn} & = & b_{n} \end{array}\right.$$
 
 ## 🛠️ Features
 
