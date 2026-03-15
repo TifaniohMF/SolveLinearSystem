@@ -19,18 +19,20 @@ The projects implements three decomposition methods:
 
 ## 📁️ Project structure
 ```text
-SolveLinearSystem-/
+SolveLinearSystem/
 ├── decomposition
-│   ├── cholesky.py
-│   ├── lu.py
-│   └── qr.py
+│   ├── cholesky.py
+│   ├── lu.py
+│   └── qr.py
 ├── docs
-│   ├── resolution_system_linear.pdf
-│   └── resolution_system_linear.tex
+│   ├── resolution_system_linear.pdf
+│   └── resolution_system_linear.tex
+├── LICENSE
 ├── main.py
 ├── README.md
 ├── requirement.txt
-└── solver.py
+├── solver.py
+└── test_decomposition.py
 
 ```
 
