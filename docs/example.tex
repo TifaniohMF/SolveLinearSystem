@@ -1,10 +1,11 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[12pt, a4paper, french]{article}
 
 % ==== IMPORT PACKAGE ====
 
 \usepackage[margin=2cm]{geometry}
 \usepackage{lmodern}
 \usepackage{minted}
+\usepackage{babel}
 
 \renewcommand{\familydefault}{\sfdefault}
 
@@ -12,15 +13,17 @@
 
 \date{\today}
 \author{}
-\title{EXAMPLE TO SOLVE LINEAR SYSTEM WITH THIS REPOSITORY}
+\title{EXEMPLE POUR RESOUDRE UN SYSTEME LINEAIRE EN UTILISANT CETTE DEPOT}
 
 \begin{document}
 \maketitle
-$A = \left(\begin{array}{ccc} 1 & 1 & 2 \\ 1 & 0 & 0 \\ 2 & 0 & 2 \end{array} \right)$ and $b = \left(\begin{array}{c} 1 \\ 1 \\ 1\end{array}\right)$.\\
-We want to solve this linear system $Ax = b$.
-If you clone this repository. Open there, then file main.py, within file change just the value of \verb|A_test| and \verb|b_test| that you want to solve.\\ Execute this command \\
+$A = \left(\begin{array}{ccc} 1 & 1 & 2 \\ 1 & 0 & 0 \\ 2 & 0 & 2 \end{array} \right)$ et $b = \left(\begin{array}{c} 1 \\ 1 \\ 1\end{array}\right)$.\\
+On veut résoudre un système linéaire de la forme $Ax = b$.\\
+Une fois que vous avez cloné cette dépôt. Ouvre votre terminal et tape la commande  : \\ \verb|cd SolveLinearSystem| \\
+Ensuite, ouvre le fichier main.py, dans ce fichier change seulement les valeurs de \verb|A_text| et \verb|b_test| en la valeurs du matrice que vous voulez résoudre. \\
+Enfin, tape la commande : \\
 \verb|python3 main.py| \\
-After this, you see the result as here 
+Après cela, vous verrez un chose du jour : \\
 \begin{minted}[frame=single]{python}
     ===== SOLVE BY METHOD QR ===== 
 
