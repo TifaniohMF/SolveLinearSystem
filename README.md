@@ -17,6 +17,10 @@ The projects implements three decomposition methods:
 - **QR decomposition**: Decomposes matrix into an orthogonal matrix ($\mathit{O}$) and a upper triangular matrix ($\mathit{R}$). Highly stable and orks non-square matrix.
 - **Cholesky decomposition**: An efficient $\mathit{L}\mathit{L}^{T}$ decomposed for **Symetric-Positive-Definite (SPD)** matrices. It is twices as fast as LU.
 
+## 📘️ Support
+If you are a few knowlegde, you can explore this document [resolution_system_linear.pdf](../SolveLinearSystem/docs/resolution_system_linear.pdf)
+
+
 ## 📁️ Project structure
 ```text
 SolveLinearSystem/
@@ -25,6 +29,8 @@ SolveLinearSystem/
 │   ├── lu.py
 │   └── qr.py
 ├── docs
+│   ├── example.pdf
+│   ├── example.tex
 │   ├── resolution_system_linear.pdf
 │   └── resolution_system_linear.tex
 ├── LICENSE
