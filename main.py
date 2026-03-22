@@ -33,10 +33,11 @@ def solve_linear_system(A, b, method='LU'):
 
 # ======= Exemple to use =======
 if __name__ == '__main__':
-    A_test = [[1,1],
-              [1,-1]]
+    A_test = [[1,1,2],
+              [1,0,0],
+              [2,0,2]]
     
-    b_test = [1, 1]
+    b_test = [1, 1, 1]
 
     try:
         solution = solve_linear_system(A_test, b_test, method='QR')

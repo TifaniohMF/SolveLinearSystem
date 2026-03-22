@@ -41,3 +41,8 @@ SolveLinearSystem/
 ### Prerequisites
 - Python 3.x
 - Numpy (for matrix storage and operation)
+
+## 📝️ Example
+If you want solve a linear system, You can use the three decomposition.
+Imagine we solve the linear system $Ax=b$.
+You can see the step to use this repository, in this document [example.pdf](../SolveLinearSystem/docs/example.pdf)

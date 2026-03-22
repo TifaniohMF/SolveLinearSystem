@@ -1,0 +1,30 @@
+\documentclass[12pt, a4paper]{article}
+
+% ==== IMPORT PACKAGE ====
+
+\usepackage[margin=2cm]{geometry}
+\usepackage{lmodern}
+\usepackage{minted}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\usemintedstyle[python]{xcode}
+
+\date{\today}
+\author{}
+\title{EXAMPLE TO SOLVE LINEAR SYSTEM WITH THIS REPOSITORY}
+
+\begin{document}
+\maketitle
+$A = \left(\begin{array}{ccc} 1 & 1 & 2 \\ 1 & 0 & 0 \\ 2 & 0 & 2 \end{array} \right)$ and $b = \left(\begin{array}{c} 1 \\ 1 \\ 1\end{array}\right)$.\\
+We want to solve this linear system $Ax = b$.
+If you clone this repository. Open there, then file main.py, within file change just the value of \verb|A_test| and \verb|b_test| that you want to solve.\\ Execute this command \\
+\verb|python3 main.py| \\
+After this, you see the result as here 
+\begin{minted}[frame=single]{python}
+    ===== SOLVE BY METHOD QR ===== 
+
+    x solution : [ 1.   1.  -0.5] # This the solution
+    Verify (Ax = b): success
+\end{minted}
+\end{document}
