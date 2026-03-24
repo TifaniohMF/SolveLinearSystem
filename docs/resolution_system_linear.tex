@@ -7,13 +7,22 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[margin=2cm]{geometry}
-\usepackage{amsfonts}
+\usepackage{amsfonts, amssymb, amsmath}
 \usepackage{lmodern}
+\usepackage{theorem}
 \usepackage{babel}
 
 \date{\today}
 \author{}
 \title{RESOLUTION DE SYSTEME LINEAIRE}
+
+\theoremstyle{break}
+\theoremheaderfont{\bfseries}
+\theorembodyfont{\upshape}
+
+\newtheorem{defin}{Définition}[section]
+\newtheorem{rema}[defin]{Remarque}
+\newtheorem{theo}[defin]{Théoreme}
 
 \renewcommand{\familydefault}{\sfdefault}
 
@@ -27,7 +36,7 @@ $$\left\lbrace\begin{array}{lll}
     a_{n1}x_{1} \: + \: a_{n2}x_{2} \: + \: \cdots \: + \: a_{nn}x_{n} & = & b_{n} \\
 \end{array} \right .$$
 
-\section*{Forme matricielle}
+\section{Forme matricielle}
 Un système d'équation linéaire peut aussi s'écrire sous forme $Ax=b \; ou \; A \in M_{mn}(\mathbb{K}),\; x \in \mathbb{K}^{n} \; et \; b \in \mathbb{K}^{m}$
 $$A = \left(\begin{array}{cccc}
     a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -50,12 +59,15 @@ $$A = \left(\begin{array}{cccc}
     \end{array}\right)$$
 
 
-\section*{Définition}
-Le rang d'une matrice notée $rg(A)$ est le nombre maximum de vecteurs ligne (ou colonne) linéairement indépendant.\\
-\textbf{Rémarque}:\\ Si $A \in M_{mn}(\mathbf{K}) \; alors \; rg(A) \leq \min(m,n)$
+\begin{defin}
+    Le rang d'une matrice notée $rg(A)$ est le nombre maximum de vecteurs ligne (ou colonne) linéairement indépendant.
+\end{defin}
+\begin{rema}
+    Si $A \in M_{mn}(\mathbf{K}) \; alors \; rg(A) \leq \min(m,n)$
+\end{rema}
 
-\section*{Résolution de système linéaire avec matrice carrée}
-\subsection*{Décomposition en LU}
+\section{Résolution de système linéaire avec matrice carrée}
+\subsection{Décomposition en LU}
 On suppose que $A \in Gl_{n}(\mathbb{K})$ et on considère que le systeme linéaire $Ax=b$. L'idée est de décomposer $A=LU$ avec $\mathit{L}$ un matrice triangulaire inférieur et $\mathit{U}$ un matrice triangulaire supérieur.\\
 Pour résoudre $Ax=b$ en 2 étape :
 \begin{itemize}
@@ -83,11 +95,14 @@ $$ l_{ij} = a_{ij} - \sum_{k=1}^{j-1}l_{ik}u_{kj} $$
 Composant de la matrice U :
 $$ u_{ij} = \frac{1}{l_{ii}}(a_{ij} - \sum_{k=1}^{i-1}l_{ik}u_{kj})$$
 \end{itemize}
-\section*{Décomposition QR}
+
+\section{Décomposition QR}
 On suppose que $A \in Gl_{n}(\mathbb{K})$. 
 L'idée est de décomposer $A=QR$ avec $\mathit{Q}$ un matrice orthogonale ($QQ^{t}=Q^{t}Q=I$) et $\mathit{R}$ un matrice triangulaire supérieur.
 Pour pouvoir faciliter la résolution de $Ax=b$. On écrit $Ax=b \equiv QRx=b$, on multiplie membre à membre par $Q^{t}$ et on obtient $Rx=Q^{t}b$.\\
-\textbf{Remarque}:\\ cette décomposition QR existe toujours.\\
+\begin{rema}
+    Cette décomposition QR existe toujours.
+\end{rema}
 \textbf{Algorithme}:\\
 Entrée : A \\
 Sortie : Q,R \\
@@ -96,24 +111,25 @@ Pour trouver Q : $$ Posons \; u_{1}=a_{1} \; ; \; q_{1}=\frac{u_{1}}{\|u_{1}\|}$
 Pour j=2,3,...,n: $$u_{j} = a_{j} - \sum_{i=1}^{j-1}<a_{j},q_{i}>q_{i} \; ; \; q_{j}=\frac{u_{j}}{\|u_{j}\|}$$
 Pour trouver R, on résout l'équation $R=Q^{t}A$.
 
-\section*{Méthode de Cholesky}
-\subsection*{Théoreme}
-Soit $A \in M_{n}(\mathbf{R})$ une matrice symétrique définie positive alors, il existe un unique $B \in M_{n}(\mathbf{R})$ triangulaire inférieur de coefficient diagonaux strictément positive tel que $A=BB^{t}$.\\
-Cette décomposition est appelée décompositionn de Cholesky.
+\section{Méthode de Cholesky}
+\begin{theo}
+    Soit $A \in M_{n}(\mathbf{R})$ une matrice symétrique définie positive alors, il existe un unique $B \in M_{n}(\mathbf{R})$ triangulaire inférieur de coefficient diagonaux strictément positive tel que $A=BB^{t}$.\\
+    Cette décomposition est appelée décompositionn de Cholesky.
+\end{theo}
 \textbf{Algorithme}: \\
 Entrée : A \\
 Sortie : B \\
 Diagonal :  $$b_{jj}=\sqrt{a_{jj}-\sum_{k=1}^{j}b_{jk}^{2}}$$
 Non diagonaux : $$ b_{ij} = \frac{1}{b_{jj}}(a_{ij} - \sum_{k=1}^{j-1}b_{i}{k}b_{jk})$$
 
-\section*{Calcul des valeurs propre et vecteurs propre}
-\subsection*{Détermination du polyônme caractéristique}
+\section{Calcul des valeurs propre et vecteurs propre}
+\subsection{Détermination du polyônme caractéristique}
 Pour trouver les éléments propre de la matrice A, la méthode la plus simple consiste à trouver la polynôme caractéristique de A, à rechercher les zéros $\lambda_{1},\lambda_{2},\cdots,\lambda{n}$ puis à résoudre le système linéaire $Ax=\lambda_{i}x$.
 Malheuresement, ce schema n'est pas satisfaisant pour les applications numeriques.
 Toutefois, la connaissance du polynôme caractéristique peut être elle même utile indépendement de la recherche des valeurs propres.
 Par la suite, on notera $P_{A}(X)=a_{0}X^{n}+a_{1}X^{n-1}+\cdots+a_{n} (a_{n} \not= 0)$ le polynôme caractéristique de la matrice A.
 
-\section*{Méthode de Leverrier}
+\section{Méthode de Leverrier}
 Soient $x_{1},x_{2},\cdots,x_{n}$ les valeurs propres $i.e$ les zéros de plynômes $P_{A}$. Introduisons  les fonctions symétriques élementaires des racines $x_{i},\:i.e$ les n nombres
 $$ \begin{array}{ccc}
     \sigma_{1} & = & x_{1}+x_{2}+\cdots+x_{n} \\
@@ -143,5 +159,5 @@ Connaissant les $S_{k}$, il suffit de résoudre un système linéaire triangulai
 or les $S_{k}$ sont facilement accessible des que l'on connait la puissance $A^{k}$ de la matrice A.
 en effet $S_{1}=x_{1}+x_{2}+\cdots+x_{n}$ est égale à la trace de A. $S_{k}$ n'est autre que la trace de $A^{k}$ car si  $x_{1},X_{2},\cdots,x_{n}$ sont les valeurs propres d'une matrice  A, $x_{1}^{k},x_{2}^{k},\cdots,x_{n}^{k}$ sont les valeurs propres de la matrice $A^{k}$.
 Nou avons donc une méthode qui fournit exactement les coefficient des polynôme caractéristique. Il faut fournir les puissances succéssives de A, calculer $A^{2}$ révient a calculer $n^2$ produit scalaire dans $\mathbb{R}^{n}$, soit éffectuer $n^{3}$ multiplication. Pour former $A_{k}=A.A^{k-1}$,
- en connaissant $A^{k-1}$, il faut également $n^{3}$ multiplication. Le cout total de la méthode est donc de l'ordre $n^{4}$ multiplication.
+en connaissant $A^{k-1}$, il faut également $n^{3}$ multiplication. Le cout total de la méthode est donc de l'ordre $n^{4}$ multiplication.
 \end{document}
