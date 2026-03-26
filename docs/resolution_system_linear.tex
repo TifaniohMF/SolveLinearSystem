@@ -23,6 +23,7 @@
 \newtheorem{defin}{Définition}[section]
 \newtheorem{rema}[defin]{Remarque}
 \newtheorem{theo}[defin]{Théoreme}
+\newtheorem{algo}{Algorithme}
 
 \renewcommand{\familydefault}{\sfdefault}
 
@@ -80,21 +81,23 @@ Il faut environ $\frac{2}{3}n^{3}$ pour calculer \textit{LU} et pour résoudre u
 Une fois obtenu la décomposition $LU$ on a $$A=LU \equiv detA\:=\:detL\:detU$$
 Or si $detL=1\:(resp\:detU=1)$ on a : $$detA\:=\:detU=\prod_{i=1}^{n} u_{ii}(resp\:detA\:=\:detU=\prod_{i=1}^{n} l_{ii}).$$
 Pour l'inverse on note $A^{-1}=(x_{1}|x_{2}| \cdots |x_{n})$ ou chacun des vecteurs $x_{i}$ est solution de $Ax_{i}=e_{i}$.\\ \\
-\textbf{Algorithme}:\\
-Entrée : A \\
-Sortie : L,U \\
-\begin{itemize}
-\item[-] \textbf{Si on suppose que les diagonales de L vaut 1}
-Composant de la matrice L :
-$$ l_{ij} = \frac{1}{u_{jj}}(a_{ij}-\sum_{k=1}^{j-1}l_{ik}u_{kj}) $$
-Composant de la matrice U :
-$$ u_{ij} = a_{ij} - \sum_{k=1}^{i-1}l_{ik}u_{kj}$$
-\item[-] \textbf{Si on suppose que les diagonales de U vaut 1}
-Composant de la matrice L :
-$$ l_{ij} = a_{ij} - \sum_{k=1}^{j-1}l_{ik}u_{kj} $$
-Composant de la matrice U :
-$$ u_{ij} = \frac{1}{l_{ii}}(a_{ij} - \sum_{k=1}^{i-1}l_{ik}u_{kj})$$
-\end{itemize}
+
+\begin{algo}
+	Entrée : A \\
+	Sortie : L,U \\
+	\begin{itemize}
+	\item[-] \textbf{Si on suppose que les diagonales de L vaut 1}
+	Composant de la matrice L :
+	$$ l_{ij} = \frac{1}{u_{jj}}(a_{ij}-\sum_{k=1}^{j-1}l_{ik}u_{kj}) $$
+	Composant de la matrice U :
+	$$ u_{ij} = a_{ij} - \sum_{k=1}^{i-1}l_{ik}u_{kj}$$
+	\item[-] \textbf{Si on suppose que les diagonales de U vaut 1}
+	Composant de la matrice L :
+	$$ l_{ij} = a_{ij} - \sum_{k=1}^{j-1}l_{ik}u_{kj} $$
+	Composant de la matrice U :
+	$$ u_{ij} = \frac{1}{l_{ii}}(a_{ij} - \sum_{k=1}^{i-1}l_{ik}u_{kj})$$
+	\end{itemize}
+\end{algo}
 
 \section{Décomposition QR}
 On suppose que $A \in Gl_{n}(\mathbb{K})$. 
@@ -103,61 +106,24 @@ Pour pouvoir faciliter la résolution de $Ax=b$. On écrit $Ax=b \equiv QRx=b$, 
 \begin{rema}
     Cette décomposition QR existe toujours.
 \end{rema}
-\textbf{Algorithme}:\\
+\begin{algo}
 Entrée : A \\
 Sortie : Q,R \\
 Notons $[q_{1},q_{2},\cdots,q_{n}] \; et \; [a_{1},a_{2},\cdots,a_{n}]$ les vécteurs colonnes réspectifs des matrices Q et A.\\
 Pour trouver Q : $$ Posons \; u_{1}=a_{1} \; ; \; q_{1}=\frac{u_{1}}{\|u_{1}\|}$$
 Pour j=2,3,...,n: $$u_{j} = a_{j} - \sum_{i=1}^{j-1}<a_{j},q_{i}>q_{i} \; ; \; q_{j}=\frac{u_{j}}{\|u_{j}\|}$$
 Pour trouver R, on résout l'équation $R=Q^{t}A$.
+\end{algo}
 
 \section{Méthode de Cholesky}
 \begin{theo}
     Soit $A \in M_{n}(\mathbf{R})$ une matrice symétrique définie positive alors, il existe un unique $B \in M_{n}(\mathbf{R})$ triangulaire inférieur de coefficient diagonaux strictément positive tel que $A=BB^{t}$.\\
     Cette décomposition est appelée décompositionn de Cholesky.
 \end{theo}
-\textbf{Algorithme}: \\
-Entrée : A \\
-Sortie : B \\
-Diagonal :  $$b_{jj}=\sqrt{a_{jj}-\sum_{k=1}^{j}b_{jk}^{2}}$$
-Non diagonaux : $$ b_{ij} = \frac{1}{b_{jj}}(a_{ij} - \sum_{k=1}^{j-1}b_{i}{k}b_{jk})$$
-
-\section{Calcul des valeurs propre et vecteurs propre}
-\subsection{Détermination du polyônme caractéristique}
-Pour trouver les éléments propre de la matrice A, la méthode la plus simple consiste à trouver la polynôme caractéristique de A, à rechercher les zéros $\lambda_{1},\lambda_{2},\cdots,\lambda{n}$ puis à résoudre le système linéaire $Ax=\lambda_{i}x$.
-Malheuresement, ce schema n'est pas satisfaisant pour les applications numeriques.
-Toutefois, la connaissance du polynôme caractéristique peut être elle même utile indépendement de la recherche des valeurs propres.
-Par la suite, on notera $P_{A}(X)=a_{0}X^{n}+a_{1}X^{n-1}+\cdots+a_{n} (a_{n} \not= 0)$ le polynôme caractéristique de la matrice A.
-
-\section{Méthode de Leverrier}
-Soient $x_{1},x_{2},\cdots,x_{n}$ les valeurs propres $i.e$ les zéros de plynômes $P_{A}$. Introduisons  les fonctions symétriques élementaires des racines $x_{i},\:i.e$ les n nombres
-$$ \begin{array}{ccc}
-    \sigma_{1} & = & x_{1}+x_{2}+\cdots+x_{n} \\
-    \sigma_{2} & = & \sum_{i>j}x_{i}x_{j} \\
-    \sigma_{3} & = & \sum_{i>j>k}x_{i}x_{j}x_{k} \\
-    \vdots & \vdots & \vdots \\
-    \sigma_{n}& = & x_{1}x_{2}\cdots x_{n} 
-    \end{array}$$
-Il est connu que les $\sigma_{i}$ sont liées aux coefficient $a_{i}$ du polynôme $P_{A}$ par la rélation $\sigma_{i}=(-1)^i\frac{a_{i}}{a_{0}}$.
-On sait que toutes fonction symétrique de racine peut s'éxprimer comme une fonction des $\sigma_{i}$, donc comme une fonction des coefficient $a_{i}$.
-En particulier, considérons pour tout $k \in \mathbb{N}$ la somme de Newton des $x_{i}$:
-$$ \begin{array}{ccc}
-    S_{1} & = & x_{1}+x_{2}+\cdots+x_{n} \\
-    S_{2} & = & x_{1}^{2}+x_{2}^{2}+\cdots+x_{n}^{2} \\
-    \vdots & \vdots & \vdots \\
-    S_{k} & = & x_{1}^{k}+x_{2}^{k}+\cdots+x_{n}^{k}
-    \end{array}$$ 
-Les somme $S_{k}$ sont reliée aux coefficient $a_{i}$ par les formule dite de Newton
-$$ \begin{array}{ccc}
-    a_{1} & = & -a_{0}S_{1} \\
-    a_{1}S_{1}+2a_{2} & = & -a_{0}S_{1} \; (a_{1}S_{1}+a_{0}S_{2}=2a_{2}) \\
-    a_{1}S_{2}+a_{1}+3a_{3} & = & -a_{0}S_{3} \; (a_{1}S_{2}+a_{2}S_{1}+a_{0}S_{3}=3a_{3}) \\
-    \vdots & \vdots & \vdots \\
-    a_{1}S_{k-1}+a_{2}S{k-2}+\cdots+ka_{k} & = & -a_{0}S_{k} 
-    \end{array}$$
-Connaissant les $S_{k}$, il suffit de résoudre un système linéaire triangulaire pour calculer les coefficients $\frac{a_{i}}{a_{0}}$.
-or les $S_{k}$ sont facilement accessible des que l'on connait la puissance $A^{k}$ de la matrice A.
-en effet $S_{1}=x_{1}+x_{2}+\cdots+x_{n}$ est égale à la trace de A. $S_{k}$ n'est autre que la trace de $A^{k}$ car si  $x_{1},X_{2},\cdots,x_{n}$ sont les valeurs propres d'une matrice  A, $x_{1}^{k},x_{2}^{k},\cdots,x_{n}^{k}$ sont les valeurs propres de la matrice $A^{k}$.
-Nou avons donc une méthode qui fournit exactement les coefficient des polynôme caractéristique. Il faut fournir les puissances succéssives de A, calculer $A^{2}$ révient a calculer $n^2$ produit scalaire dans $\mathbb{R}^{n}$, soit éffectuer $n^{3}$ multiplication. Pour former $A_{k}=A.A^{k-1}$,
-en connaissant $A^{k-1}$, il faut également $n^{3}$ multiplication. Le cout total de la méthode est donc de l'ordre $n^{4}$ multiplication.
+\begin{algo}
+	Entrée : A \\
+	Sortie : B \\
+	Diagonal :  $$b_{jj}=\sqrt{a_{jj}-\sum_{k=1}^{j}b_{jk}^{2}}$$
+	Non diagonaux : $$ b_{ij} = \frac{1}{b_{jj}}(a_{ij} - \sum_{k=1}^{j-1}b_{i}{k}b_{jk})$$
+\end{algo}
 \end{document}
