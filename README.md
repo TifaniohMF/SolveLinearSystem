@@ -52,3 +52,17 @@ SolveLinearSystem/
 If you want solve a linear system, You can use the three decomposition.
 Imagine we solve the linear system $Ax=b$.
 You can see the step to use this repository, in this document [example.pdf](../SolveLinearSystem/docs/example.pdf)
+
+## Test
+If you are not sure that this program is unreliable.
+Execute this command
+```bash
+cd SolveLinearSystem
+```
+```bash
+PYTHONPATH=. pytest -q
+```
+If allgoes well, you see
+```text
+4 passed in 0.12 (Or something similar)
+```

@@ -5,9 +5,9 @@ def solve_system(L, U, b, kind='LU'):
     # 1. Descent (Forward substitution) for Ly = b
     
     if kind in ['LU','Cholesky']:
-        y = np.zeros_like(b)
+        y = np.zeros_like(b, dtype=float)
         for i in range(len(b)):
-            y[i] = (b[i] - np.dot(L[i,:i],y[:i])) // L[i,i]
+            y[i] = (b[i] - np.dot(L[i,:i],y[:i])) / L[i,i]
 
     else : # For QR, b is already trasformed in Q^T * b
         y = b

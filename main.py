@@ -19,7 +19,7 @@ def solve_linear_system(A, b, method='LU'):
     elif method == 'Cholesky':
         # Ax = b => LL^T x = b. We solve Ly = b then l^T x = y
         L = decomposition_cholesky(A)
-        x = solve_system(L,L.T, b, kind='Cholesy')
+        x = solve_system(L, L.T, b, kind='Cholesky')
 
     elif method == 'QR':
         # Ax = b => QRx = b => Rx = Q^T b
