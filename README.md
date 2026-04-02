@@ -47,6 +47,16 @@ SolveLinearSystem/
 ### Prerequisites
 - Python 3.x
 - Numpy (for matrix storage and operation)
+-Git
+
+### Install and use
+1.Clone repository
+```bash
+git clone https://github.com/TifaniohMF/SolveLinearSystem.git
+cd SolveLinearSystem
+```
+2.Use
+You can see the use in example undermentioned.
 
 ## 📝️ Example
 If you want solve a linear system, You can use the three decomposition.
@@ -62,7 +72,7 @@ cd SolveLinearSystem
 ```bash
 PYTHONPATH=. pytest -q
 ```
-If allgoes well, you see
+If all goes well, you see
 ```text
 4 passed in 0.12 (Or something similar)
 ```
