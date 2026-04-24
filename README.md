@@ -38,7 +38,7 @@ SolveLinearSystem/
 ├── README.md
 ├── requirement.txt
 ├── solver.py
-└── test_decomposition.py
+└── test_solver.py
 
 ```
 
