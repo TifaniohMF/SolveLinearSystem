@@ -14,15 +14,17 @@
 
 \date{\today}
 \author{}
-\title{RESOLUTION DE SYSTEME LINEAIRE}
+\title{RÉSOLUTION DE SYSTÈME LINÉAIRE}
+
+\pagestyle{headings}
 
 \theoremstyle{break}
-\theoremheaderfont{\bfseries}
+\theoremheaderfont{\scshape}
 \theorembodyfont{\upshape}
 
 \newtheorem{defin}{Définition}[section]
 \newtheorem{rema}[defin]{Remarque}
-\newtheorem{theo}[defin]{Théoreme}
+\newtheorem{theo}[defin]{Théorème}
 \newtheorem{algo}{Algorithme}
 
 \renewcommand{\familydefault}{\sfdefault}
@@ -37,7 +39,7 @@ $$\left\lbrace\begin{array}{lll}
     a_{n1}x_{1} \: + \: a_{n2}x_{2} \: + \: \cdots \: + \: a_{nn}x_{n} & = & b_{n} \\
 \end{array} \right .$$
 
-\section{Forme matricielle}
+\begin{center}\section{Forme matricielle}\end{center}
 Un système d'équation linéaire peut aussi s'écrire sous forme $Ax=b \; ou \; A \in M_{mn}(\mathbb{K}),\; x \in \mathbb{K}^{n} \; et \; b \in \mathbb{K}^{m}$
 $$A = \left(\begin{array}{cccc}
     a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -64,10 +66,10 @@ $$A = \left(\begin{array}{cccc}
     Le rang d'une matrice notée $rg(A)$ est le nombre maximum de vecteurs ligne (ou colonne) linéairement indépendant.
 \end{defin}
 \begin{rema}
-    Si $A \in M_{mn}(\mathbf{K}) \; alors \; rg(A) \leq \min(m,n)$
+    Si $A \in M_{mn}(\mathbb{K}) \; alors \; rg(A) \leq \min(m,n)$
 \end{rema}
 
-\section{Résolution de système linéaire avec matrice carrée}
+\begin{center}\section{Résolution de système linéaire avec matrice carrée}\end{center}
 \subsection{Décomposition en LU}
 On suppose que $A \in Gl_{n}(\mathbb{K})$ et on considère que le systeme linéaire $Ax=b$. L'idée est de décomposer $A=LU$ avec $\mathit{L}$ un matrice triangulaire inférieur et $\mathit{U}$ un matrice triangulaire supérieur.\\
 Pour résoudre $Ax=b$ en 2 étape :
@@ -79,7 +81,7 @@ Il faut environ $\frac{2}{3}n^{3}$ pour calculer \textit{LU} et pour résoudre u
 \textbf{Application}:\\
 \textbf{Calcul de déterminant et inverse}:\\
 Une fois obtenu la décomposition $LU$ on a $$A=LU \equiv detA\:=\:detL\:detU$$
-Or si $detL=1\:(resp\:detU=1)$ on a : $$detA\:=\:detU=\prod_{i=1}^{n} u_{ii}(resp\:detA\:=\:detU=\prod_{i=1}^{n} l_{ii}).$$
+Or si $detL=1\:(resp\:detU=1)$ on a : $$detA\:=\:detU=\displaystyle\prod_{i=1}^{n} u_{ii}(resp\:detA\:=\:detU=\displaystyle\prod_{i=1}^{n} l_{ii}).$$
 Pour l'inverse on note $A^{-1}=(x_{1}|x_{2}| \cdots |x_{n})$ ou chacun des vecteurs $x_{i}$ est solution de $Ax_{i}=e_{i}$.\\ \\
 
 \begin{algo}
@@ -99,7 +101,7 @@ Pour l'inverse on note $A^{-1}=(x_{1}|x_{2}| \cdots |x_{n})$ ou chacun des vecte
 	\end{itemize}
 \end{algo}
 
-\section{Décomposition QR}
+\begin{center}\section{Décomposition QR}\end{center}
 On suppose que $A \in Gl_{n}(\mathbb{K})$. 
 L'idée est de décomposer $A=QR$ avec $\mathit{Q}$ un matrice orthogonale ($QQ^{t}=Q^{t}Q=I$) et $\mathit{R}$ un matrice triangulaire supérieur.
 Pour pouvoir faciliter la résolution de $Ax=b$. On écrit $Ax=b \equiv QRx=b$, on multiplie membre à membre par $Q^{t}$ et on obtient $Rx=Q^{t}b$.\\
@@ -115,9 +117,9 @@ Pour j=2,3,...,n: $$u_{j} = a_{j} - \sum_{i=1}^{j-1}<a_{j},q_{i}>q_{i} \; ; \; q
 Pour trouver R, on résout l'équation $R=Q^{t}A$.
 \end{algo}
 
-\section{Méthode de Cholesky}
+\begin{center}\section{Méthode de Cholesky}\end{center}
 \begin{theo}
-    Soit $A \in M_{n}(\mathbf{R})$ une matrice symétrique définie positive alors, il existe un unique $B \in M_{n}(\mathbf{R})$ triangulaire inférieur de coefficient diagonaux strictément positive tel que $A=BB^{t}$.\\
+    Soit $A \in M_{n}(\mathbb{R})$ une matrice symétrique définie positive alors, il existe un unique $B \in M_{n}(\mathbb{R})$ triangulaire inférieur de coefficient diagonaux strictément positive tel que $A=BB^{t}$.\\
     Cette décomposition est appelée décompositionn de Cholesky.
 \end{theo}
 \begin{algo}
