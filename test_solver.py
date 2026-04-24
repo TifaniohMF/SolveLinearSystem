@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 from main import solve_linear_system
 from decomposition.lu import decomposition_lu
 from decomposition.cholesky import decomposition_cholesky
