@@ -30,21 +30,3 @@ def solve_linear_system(A, b, method='LU'):
         raise ValueError("Unrecognized method")
     
     return x
-
-# ======= Exemple to use =======
-if __name__ == '__main__':
-    A_test = [[1,1,2],
-              [1,0,0],
-              [2,0,2]]
-    
-    b_test = [1, 1, 1]
-
-    try:
-        solution = solve_linear_system(A_test, b_test, method='QR')
-        print(f"x solution : {solution}")
-
-        # Verify
-        verify = np.allclose(np.dot(A_test, solution), b_test)
-        print(f"Verify (Ax = b): {'success' if verify else 'Echec'}")
-    except Exception as e:
-        print(f"Error : {e}")
