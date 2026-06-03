@@ -47,7 +47,7 @@ SolveLinearSystem/
 ### Prerequisites
 - Python 3.x
 - Numpy (for matrix storage and operation)
--Git
+- Git
 
 ### Install and use
 1.Clone repository
@@ -70,9 +70,5 @@ Execute this command
 cd SolveLinearSystem
 ```
 ```bash
-PYTHONPATH=. pytest -q
-```
-If all goes well, you see
-```text
-4 passed in 0.12 (Or something similar)
+pytest test_solver.py
 ```
