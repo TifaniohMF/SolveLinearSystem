@@ -1,7 +1,10 @@
+import time
 import numpy as np
 from decomposition.lu import decomposition_lu
 from decomposition.qr import decomposition_qr
 from decomposition.cholesky import decomposition_cholesky
+from database.connection import *
+from database.repository import save_system, save_solution, system_charged
 from solver import solve_system
 
 def solve_linear_system(A, b, method='LU'):
@@ -30,3 +33,49 @@ def solve_linear_system(A, b, method='LU'):
         raise ValueError("Unrecognized method")
     
     return x
+    
+def execute_pipeline():
+    print("=== [1] Initial data base ===")
+    init_db()
+    
+    # Data
+    # 3x1 + 2x2 = 1
+    # 2x1 - 2x2 = -2
+    
+    A = np.array([[3.0, 2.0], 
+                  [2.0, -2.0]])
+    B = np.array([1.0, -2.0])
+    
+    print("\n=== [2] Save the system initial in data base ===")
+    id_system = save_system(
+        name_project="System test 2×2", 
+        A=A, 
+        B=B, 
+        method="QR method"
+    )
+    print(f"System registered with ID : {id_system}")
+    
+    print("\n=== [3] Solve system ===")
+    try:
+        start_time = time.time()
+        X = solve_linear_system(A, B,method='QR')
+        end_time = time.time()
+        
+        calculus_time = (end_time - start_time) * 1000 # in milliseconds
+        print(f"Solution finded: {X}")
+        print(f"Calculus time: {calculus_time:.4f} ms")
+        
+        print("\n=== [4] Save result ===")
+        save_solution(id_system, X, calculus_time)
+        print("Resultat archived with succes.")
+        
+    except Exception as e:
+        print(f"Error during solving: {e}")
+
+    print("\n=== [Bonus] Verify reading (Reload) ===")
+    A_retrieve, B_retrieve = system_charged(id_system)
+    print("A matrix recharged since the DB :\n", A_retrieve)
+    print("B vector recharged since the DB :", B_retrieve)
+
+if __name__ == "__main__":
+    execute_pipeline()
