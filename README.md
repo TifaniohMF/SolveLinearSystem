@@ -58,12 +58,22 @@ cd SolveLinearSystem
 2.Use
 You can see the use in example undermentioned.
 
+## 💾 Save to data base
+If you want to save the data in Systems linear as solution, systems, coefficient in a data base.
+In file main.py, write your systems to solve with a method to use it.
+Then, compile with command
+```bash
+python3 main.py
+```
+A file Linear_system.db is generated automaticaly with your data.
+If you do a other system linear to solve and you compile the file the data is saving in data base Linear_system.db.
+
 ## 📝️ Example
 If you want solve a linear system, You can use the three decomposition.
 Imagine we solve the linear system $Ax=b$.
 You can see the step to use this repository, in this document [example.pdf](../SolveLinearSystem/docs/example.pdf)
 
-## Test
+## 🧮 Test
 If you are not sure that this program is unreliable.
 Execute this command
 ```bash
