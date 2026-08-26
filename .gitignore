@@ -1,7 +1,13 @@
+# Python
 __pycache__
 .pytest_cache/
 .vscode
 .ipynb_checkpoints/
+
+# LaTeX
 _minted-example/
 *.aux
 *.log
+
+# Data base
+*.db
