@@ -6,11 +6,11 @@ from decomposition.cholesky import decomposition_cholesky
 from database.connection import *
 from database.repository import save_system, save_solution, system_charged
 from solver import solve_system
+from diagnostics import build_certificate, validate_system
 
-def solve_linear_system(A, b, method='LU'):
+def solve_linear_system(A, b, method='LU', return_certificate=False):
     '''Solve system to use method choice'''
-    A = np.array(A, dtype=float)
-    b = np.array(b, dtype=float)
+    A, b = validate_system(A, b)
 
     print(f"\n ===== SOLVE BY METHOD {method} ===== \n")
 
@@ -32,6 +32,9 @@ def solve_linear_system(A, b, method='LU'):
     else:
         raise ValueError("Unrecognized method")
     
+    certificate = build_certificate(A, b, x, method)
+    if return_certificate:
+        return x, certificate
     return x
     
 def execute_pipeline():
@@ -58,12 +61,17 @@ def execute_pipeline():
     print("\n=== [3] Solve system ===")
     try:
         start_time = time.time()
-        X = solve_linear_system(A, B,method='QR')
+        X, certificate = solve_linear_system(
+            A, B, method='QR', return_certificate=True
+        )
         end_time = time.time()
         
         calculus_time = (end_time - start_time) * 1000 # in milliseconds
         print(f"Solution finded: {X}")
         print(f"Calculus time: {calculus_time:.4f} ms")
+        print(f"Residual infinity norm: {certificate['residual_norm_inf']:.3e}")
+        if certificate['warnings']:
+            print(f"Numerical warnings: {', '.join(certificate['warnings'])}")
         
         print("\n=== [4] Save result ===")
         save_solution(id_system, X, calculus_time)
