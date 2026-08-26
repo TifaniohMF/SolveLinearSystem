@@ -82,3 +82,19 @@ cd SolveLinearSystem
 ```bash
 pytest test_solver.py
 ```
+
+## 🔎 Numerical certificate
+
+`solve_linear_system` validates the matrix and right-hand side before solving.
+Pass `return_certificate=True` to receive the solution together with a
+machine-readable certificate containing the residual norm, backward error,
+condition estimate, numerical rank, and reliability warnings:
+
+```python
+x, certificate = solve_linear_system(A, b, method="QR", return_certificate=True)
+print(certificate["residual_norm_inf"])
+```
+
+The SQLite repository stores one solution per system and reconstructs
+coefficients through `system_id`. Generated database files are local runtime
+artifacts and should not be committed.
