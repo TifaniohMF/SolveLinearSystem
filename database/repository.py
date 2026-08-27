@@ -31,31 +31,39 @@ def save_solution(system_id, X, calculus_time):
 
     # Conversion table NumPy to chain JSON textual for SQLite
     X_json = json.dumps(X.tolist())
-    cursor.execute("INSERT INTO Solution (system_id, X_vector, calculus_time) VALUES (?, ?, ?)", (system_id, X_json, calculus_time))
+    cursor.execute(
+        "INSERT OR REPLACE INTO Solution (system_id, X_vector, calculus_time) "
+        "VALUES (?, ?, ?)",
+        (system_id, X_json, calculus_time),
+    )
 
     conn.commit()
     conn.close()
     
 def system_charged(system_id):
-	# Retrieve the system stored to can re-use or re-analyzed
-	conn = get_connection()
-	cursor = conn.cursor()
-	
-	# Retrieve size
-	cursor.execute("SELECT size FROM Systems WHERE id=?", (system_id,))
-	sizes = cursor.fetchone()[0]
-	
-	# Reconstruction A and B
-	cursor.execute("SELECT rows, columns, A_value, B_value FROM Coefficient WHERE id=?",(system_id,))
-	row = cursor.fetchall()
-	
-	A = np.zeros((sizes,sizes))
-	B = np.zeros(sizes)
-	
-	for rows, columns, val_a, val_b in row:
-		A[rows, columns] = val_a
-		if columns == 0:
-			B[rows] = val_b
-			
-	conn.close()
-	return A, B
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT size FROM Systems WHERE id=?", (system_id,))
+    size_row = cursor.fetchone()
+    if size_row is None:
+        conn.close()
+        raise ValueError(f"Unknown system id: {system_id}")
+    sizes = size_row[0]
+
+    cursor.execute(
+        "SELECT rows, columns, A_value, B_value "
+        "FROM Coefficient WHERE system_id=?",
+        (system_id,),
+    )
+    rows = cursor.fetchall()
+
+    matrix = np.zeros((sizes, sizes))
+    vector = np.zeros(sizes)
+    for row_index, column_index, value_a, value_b in rows:
+        matrix[row_index, column_index] = value_a
+        if column_index == 0:
+            vector[row_index] = value_b
+
+    conn.close()
+    return matrix, vector

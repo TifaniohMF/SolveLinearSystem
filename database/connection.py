@@ -37,7 +37,7 @@ def init_db():
     # Table to store X result
     cursor.execute(""" 
     CREATE TABLE IF NOT EXISTS Solution ( 
-    system_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    system_id INTEGER PRIMARY KEY,
     X_vector TEXT NOT NULL,
     calculus_time REAL NOT NULL,
     FOREIGN KEY(system_id) REFERENCES Systems(id)
