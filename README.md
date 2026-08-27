@@ -24,22 +24,26 @@ If you are a few knowlegde, you can explore this document [resolution_system_lin
 ## 📁️ Project structure
 ```text
 SolveLinearSystem/
+├── database
+│   ├── connection.py
+│   ├── __init__.py
+│   └── repository.py
 ├── decomposition
-│   ├── cholesky.py
-│   ├── lu.py
-│   └── qr.py
+│   ├── cholesky.py
+│   ├── lu.py
+│   └── qr.py
+├── diagnostics.py
 ├── docs
-│   ├── example.pdf
-│   ├── example.tex
-│   ├── resolution_system_linear.pdf
-│   └── resolution_system_linear.tex
+│   ├── example.pdf
+│   ├── example.tex
+│   ├── resolution_system_linear.pdf
+│   └── resolution_system_linear.tex
 ├── LICENSE
 ├── main.py
 ├── README.md
 ├── requirement.txt
 ├── solver.py
 └── test_solver.py
-
 ```
 
 ## 💻️ Usage
